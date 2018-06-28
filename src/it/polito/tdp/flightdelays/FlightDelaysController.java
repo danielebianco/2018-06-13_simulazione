@@ -46,15 +46,19 @@ public class FlightDelaysController {
     	Airline airline = this.cmbBoxLineaAerea.getValue();
     	
     	if(airline==null) {
-    		this.txtResult.setText("Selezionare una delle airline a disposizione!\n");
+    		this.txtResult.setText("Selezionare una linea aerea!\n");
     		return;
     	}
     	
     	model.creaGrafo(airline);
-    	txtResult.appendText("10 peggiori rotte:\n");
+    	
+    	txtResult.appendText(String.format("Grafo creato: %d vertici e %d archi...\n\n",
+    			model.getGrafo().vertexSet().size(), model.getGrafo().edgeSet().size()));
+    	
+    	txtResult.appendText(">> 10 peggiori rotte:\n");
     	
     	for(Rotta r : model.stampaRisultato(airline)){
-    		txtResult.appendText(r.toString()+"\n");
+    		txtResult.appendText("- " + r.toString()+"\n");
     	}    	
     }
 

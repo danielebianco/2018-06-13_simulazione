@@ -101,4 +101,8 @@ public class Model {
 		return result;
 	}
 
+	public SimpleDirectedWeightedGraph<Airport, DefaultWeightedEdge> getGrafo() {
+		return grafo;
+	}
+	
 }
