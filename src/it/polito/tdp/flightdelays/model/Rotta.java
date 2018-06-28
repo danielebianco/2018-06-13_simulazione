@@ -35,10 +35,10 @@ public class Rotta {
 	public void setAvg(double avg) {
 		this.avg = avg;
 	}
-
+	
 	@Override
 	public String toString() {
-		return a1.getName() + " => " + a2.getName() + " ("+avg+")" ;
+		return a1.getName() + " -> " + a2.getName() + " ["+avg+"]" ;
 	}
 	
 	

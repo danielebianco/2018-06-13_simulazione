@@ -19,21 +19,21 @@ public class Model {
 	
 	private List<Airline> airlines;
 	private List<Airport> airports;
-	private List<Flight> flights;
+//	private List<Flight> flights;
 	private FlightDelaysDAO fdao;
 	private SimpleDirectedWeightedGraph<Airport, DefaultWeightedEdge> grafo;
 	private AirlineIdMap airlineIdMap;
 	private AirportIdMap airportIdMap;
-	private FlightIdMap flightIdMap; 
+//	private FlightIdMap flightIdMap; 
 	
 	public Model() {
 		this.fdao = new FlightDelaysDAO();
 		this.airlineIdMap = new AirlineIdMap();
 		this.airportIdMap = new AirportIdMap();
-		this.flightIdMap = new FlightIdMap();
+//		this.flightIdMap = new FlightIdMap();
 		this.airlines = fdao.loadAllAirlines(airlineIdMap);
 		this.airports = fdao.loadAllAirports(airportIdMap);
-		this.flights = fdao.loadAllFlights(airlineIdMap,airportIdMap, flightIdMap);
+//		this.flights = fdao.loadAllFlights(airlineIdMap,airportIdMap, flightIdMap);
 	}
 
 	public List<Airline> getAirlines() {
@@ -43,12 +43,12 @@ public class Model {
 		return airlines;
 	}
 
-	public List<Flight> getFlights() {
-		if(this.flights==null) {
-			return new ArrayList<Flight>();
-		}
-		return flights;
-	}
+//	public List<Flight> getFlights() {
+//		if(this.flights==null) {
+//			return new ArrayList<Flight>();
+//		}
+//		return flights;
+//	}
 	
 	public List<Airport> getAirport() {
 		if(this.airports==null) {
@@ -60,7 +60,7 @@ public class Model {
 	public void creaGrafo(Airline airline) {
 		this.grafo = new SimpleDirectedWeightedGraph<>(DefaultWeightedEdge.class);
 		Graphs.addAllVertices(grafo, airports);
-		for(Flight f : fdao.getVoliMedia(airline,this.airportIdMap)) {
+		for(Flight f : fdao.getVoliMedia(airline, this.airportIdMap)) {
 			if(f.getA1()!=null && f.getA2()!=null) {
 				double distanza = LatLngTool.distance(new LatLng(f.getA1().getLatitude(), f.getA1().getLongitude()),
 						new LatLng(f.getA2().getLatitude(), f.getA2().getLongitude()), LengthUnit.KILOMETER);
@@ -75,7 +75,7 @@ public class Model {
 		
 		List<DefaultWeightedEdge> list = new ArrayList<DefaultWeightedEdge>(grafo.edgeSet());
 		
-		if(grafo!=null) {
+		if(grafo == null) {
 			this.creaGrafo(airline);
 		}
 		
